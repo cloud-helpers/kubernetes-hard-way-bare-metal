@@ -19,6 +19,46 @@ itself derived from the famous
 guide](https://github.com/kelseyhightower/kubernetes-the-hard-way),
 by [Kelsey Hightower](https://github.com/kelseyhightower).
 
+Except for the Proxomox host itself, which is based on a
+[Debian distribution](https://www.debian.org/), all the nodes
+are installed with [CentOS distributions](https://www.centos.org).
+Other distributions may of course be used. One distrubtion has to be chosen,
+so let it be CentOS.
+
+For the Kubernetes-related tools and binaries (_e.g._, Docker, Go,
+`kubectl`), two variants are documented:
+* CentOS 7 packaged versions, _e.g._:
+  + [Docker packages](https://git.centos.org/rpms/docker/releases)
+  + [Go packages](https://git.centos.org/rpms/golang/releases)
+  + [`kubernetes` packages](https://git.centos.org/rpms/kubernetes/releases)
+* Upstream versions:
+  + [Docker CE](https://download.docker.com/linux/centos/7/x86_64/stable/Packages/)
+  + [Go latest releases](https://golang.org/doc/devel/release.html)
+  + [Kubernetes latest release number](https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+  + [Go]()
+  + [`kubectl` v1.14.2 binary](https://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/amd64/kubectl)
+* Kubernetes CentOS packages are fairly outdated (v1.5.2).
+  There are various consequences, for instance:
+  + The DNS-related services have to keep simple, like (old versions
+    of) [Kube-DNS](https://github.com/kubernetes/dns) only
+  + Most of the (recent) documentation on Kubernetes services
+    does not work as is with those older versions. For instance,
+	the `Service` part of
+	[Nginx](https://kubernetes.io/docs/concepts/services-networking/connect-applications-service/)
+	does not work with CentOS packages of Kubernetes
+* Upgrading some versions of Kubernetes utilities on CentOS is not
+  an esay task, as all the Docker, Go and Kubernetes tools have been
+  packaged in a consistent way on the CentOS distribution. Either of
+  those cannot be upgraded to newer versions without breaking the
+  CentOS packaging contraint.
+* Both variants have been documented, because depending on the use case,
+  either may be prefered:
+  + CentOS packages for a quick setup, fully supported and consistent
+    with the rest of the CentOS distribution
+  + Upstream binaries for a more flexible and up-to-date setup,
+    requiring more configuration and maintenance work
+
+
 As many other documentations, that one will soon be outdated, and imperfect
 for sure. Contributions are therefore welcome to complemenent that guide.
 For instance, through
