@@ -4,7 +4,7 @@ Kubernetes The Hard Way - Bare Metal with VM and Containers
 ![Containers on Docks](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/img/Containers%20on%20Docks%20-%20Pixabay.jpg)
 
 # General
-[This set of documents](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
+[This set of documents](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
 aim at providing full hands-on guides to set up
 [Kubernetes (aka K8S)](https://kubernetes.io) clusters on bare metal servers,
 which can actually be physical servers or virtual machines (VM),
