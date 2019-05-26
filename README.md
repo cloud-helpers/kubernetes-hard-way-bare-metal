@@ -3,6 +3,21 @@ Kubernetes The Hard Way - Bare Metal with VM and Containers
 
 ![Containers on Docks](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/img/Containers%20on%20Docks%20-%20Pixabay.jpg)
 
+# General
+[This set of documents](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
+aim at providing full hands-on guides to set up
+[Kubernetes (aka K8S)](https://kubernetes.io) clusters on bare metal servers,
+which can actually be physical servers or virtual machines (VM),
+on premises or in private and public clouds.
+
+Those documents are adaptations of the excellent
+["Kubernetes The Hard Way - Bare Metal"
+guide](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md),
+itself derived from the famous
+["Kubernetes The Har Way"
+guide](https://github.com/kelseyhightower/kubernetes-the-hard-way),
+by [Kelsey Hightower](https://github.com/kelseyhightower).
+
 # [With KVM/QEMU Virtual Machines (VM)](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/kvm-qemu/README.md)
 Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
@@ -37,21 +52,6 @@ and serverless platforms, mainly servicing single processes.
 [This guide](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
 therefore aims at helping filling the gap of documentation in the
 Linux container space for Kubernetes.
-
-# General
-[This set of documents](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
-aim at providing full hands-on guides to set up
-[Kubernetes (aka K8S)](https://kubernetes.io) clusters on bare metal servers,
-which can actually be physical servers or virtual machines (VM),
-on premises or in private and public clouds.
-
-Those documents are adaptations of the excellent
-["Kubernetes The Hard Way - Bare Metal"
-guide](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md),
-itself derived from the famous
-["Kubernetes The Har Way"
-guide](https://github.com/kelseyhightower/kubernetes-the-hard-way),
-by [Kelsey Hightower](https://github.com/kelseyhightower).
 
 # References
 * [Kubernetes The Hard Way - Bare Metal](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md),
