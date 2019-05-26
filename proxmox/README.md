@@ -11,7 +11,7 @@ Kubernetes The Hard Way - Setup of the Proxmox Host
   * [Complement the installation on the gateway](#complement-the-installation-on-the-gateway)
 
 # Overview
-[This document](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md)
+[This document](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md)
 aims at providing a full hands-on guide to set up a
 [Proxmox distribution](https://www.proxmox.com/en/proxmox-ve/features)
 in order to accommodate [Kubernetes (aka K8S)](https://kubernetes.io)

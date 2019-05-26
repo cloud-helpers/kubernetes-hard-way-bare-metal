@@ -60,7 +60,7 @@ Kubernetes The Hard Way - Bare Metal with LXC Containers
   * [Create a full deployment of several simulator pods](#create-a-full-deployment-of-several-simulator-pods)
 
 # Overview
-[This document](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
+[This document](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
 aims at providing a full hands-on guide to set up a
 [Kubernetes (aka K8S)](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
@@ -116,8 +116,8 @@ in production-like settings, while keeping some good level of security.
 As many other documentations, that one will soon be outdated, and imperfect
 for sure. Contributions are therefore welcome to complemenent that guide.
 For instance, through
-[issues](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/issues) or
-[pull requests](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/pulls).
+[issues](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/issues) or
+[pull requests](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/pulls).
 
 # References
 * [Kubernetes The Hard Way - Bare Metal](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md),

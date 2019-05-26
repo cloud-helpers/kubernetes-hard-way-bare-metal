@@ -21,8 +21,8 @@ by [Kelsey Hightower](https://github.com/kelseyhightower).
 As many other documentations, that one will soon be outdated, and imperfect
 for sure. Contributions are therefore welcome to complemenent that guide.
 For instance, through
-[issues](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/issues) or
-[pull requests](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/pulls).
+[issues](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/issues) or
+[pull requests](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/pulls).
 
 # [With KVM/QEMU Virtual Machines (VM)](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/kvm-qemu/README.md)
 Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
