@@ -32,9 +32,6 @@ aims at providing a full hands-on guide to set up a
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
 [KVM/QEMU virtual machines (VM)](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine).
 
-Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
-[Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
-[KVM/QEMU virtual machines (VM)](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine).
 Using any other
 [virtualization framework](https://en.wikipedia.org/wiki/OS-level_virtualisation)
 (_e.g._, [OpenVZ](https://openvz.org)) than Proxmox should not make
