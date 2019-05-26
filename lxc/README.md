@@ -1,7 +1,7 @@
 Kubernetes The Hard Way - Proxmox LXC-based Cluster
 ===================================================
 
-![Creative container assembly](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/blob/master/img/Creative%20container%20-%20Pixabay.jpg)
+![Creative container assembly](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Creative%20container%20-%20Pixabay.jpg)
 
 - [Kubernetes The Hard Way - Proxmox LXC-based Cluster](#kubernetes-the-hard-way---proxmox-lxc-based-cluster)
 - [Overview](#overview)
@@ -125,10 +125,10 @@ For instance, through
   on Fedora with flannel](https://kubernetes.io/docs/getting-started-guides/fedora/flannel_multi_node_cluster/)
 * Kubernetes - Architecture, by
   [Khtan66 - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=53571935)
-  ![Kubernetes - Architecture](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/blob/master/img/Kubernetes%20-%20Architecture.png "Kubernetes - Architecture")
+  ![Kubernetes - Architecture](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Architecture.png "Kubernetes - Architecture")
 * Kubernetes - Pod Networkingby, by
   [Marvin The Paranoid - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=75140812)
-  ![Kubernetes - Pod Networking](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/blob/master/img/Kubernetes%20-%20Pod%20Networking.png "Kubernetes - Pod Networking")
+  ![Kubernetes - Pod Networking](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Pod%20Networking.png "Kubernetes - Pod Networking")
 * [Documentation, generate the table of content (TOC)](https://ecotrust-canada.github.io/markdown-toc/)
 
 # Host preparation
