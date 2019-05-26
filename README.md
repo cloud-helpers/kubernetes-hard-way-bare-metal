@@ -56,7 +56,7 @@ containers. Basically, Linux containers aim at executing full-blown (Linux)
 operating system (OS), whereas Docker containers aim at micro-services
 and serverless platforms, mainly servicing single processes.
 
-[This guide](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
+[This guide](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
 therefore aims at helping filling the gap of documentation in the
 Linux container space for Kubernetes.
 
