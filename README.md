@@ -12,7 +12,8 @@ on premises or in private and public clouds.
 
 Those documents are adaptations of the excellent
 ["Kubernetes The Hard Way - Bare Metal"
-guide](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md),
+guide](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md)
+(by [Tobias Schöneberg](https://github.com/metas-ts)),
 itself derived from the famous
 ["Kubernetes The Har Way"
 guide](https://github.com/kelseyhightower/kubernetes-the-hard-way),
