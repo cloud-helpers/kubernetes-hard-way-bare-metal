@@ -1,5 +1,5 @@
-Kubernetes The Hard Way - Bare Metal with LXC Containers
-========================================================
+Kubernetes The Hard Way - Setup of the Proxmox Host
+===================================================
 
 ![Lake Tisza](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/img/Lake%20Tisza%20-%20Pixabay.jpg)
 
