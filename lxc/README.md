@@ -1,5 +1,5 @@
-Kubernetes The Hard Way - Proxmox LXC-based Cluster
-===================================================
+Kubernetes The Hard Way - Bare Metal with LXC Containers
+========================================================
 
 ![Creative container assembly](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Creative%20container%20-%20Pixabay.jpg)
 
