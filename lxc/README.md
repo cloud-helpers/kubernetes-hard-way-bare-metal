@@ -108,8 +108,9 @@ the Linux container space.
 
 All the nodes are setup with [CentOS distributions](https://www.centos.org),
 and insulated thanks to a gateway: all the traffic from outside
-the cluster is channelled through the gateway. The set up of such
-a gateway is also an addition to this guide. It allows
+the cluster is channelled through the gateway. The [set up of such
+a gateway](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md)
+is also an addition to this guide. It allows
 one to experiment with Kubernetes clusters, including operating some
 in production-like settings, while keeping some good level of security.
 

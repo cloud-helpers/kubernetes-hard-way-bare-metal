@@ -42,7 +42,7 @@ While full virtualization (with virtual machines) provides more flexibility
 memory resources), it implies more overhead than containers.
 See [the guide on Kubernetes setup on LXC
 containers](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
-for more details on a more lightweight setup.
+for more details on a lighter setup.
 
 For instance, that latter is based on the 
 ["Kubernetes The Hard Way - Bare Metal"
@@ -50,7 +50,7 @@ guide](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-T
 which suggests to create many nodes (_e.g._, controller plane, load balancers,
 worker nodes). But creating all those nodes as KVM/QEMU VM would load the
 (Proxmox) host quite heavily. Hence, for that KVM/QEMU guide, a lighter
-setup is prefered, with only one master and two worker nodes.
+setup is prefered, with a single master and two worker nodes.
 
 That guide is therefore an adaptation of the
 [Getting started guide on installing a multi-node Kubernetes cluster
@@ -58,8 +58,9 @@ That guide is therefore an adaptation of the
 
 All the nodes are setup with [CentOS distributions](https://www.centos.org),
 and insulated thanks to a gateway: all the traffic from outside
-the cluster is channelled through the gateway. The set up of such
-a gateway is also an addition to this guide. It allows
+the cluster is channelled through the gateway. The [set up of such
+a gateway](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md)
+is also an addition to this guide. It allows
 one to experiment with Kubernetes clusters, including operating some
 in production-like settings, while keeping some good level of security.
 
