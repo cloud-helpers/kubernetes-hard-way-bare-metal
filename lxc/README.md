@@ -142,7 +142,7 @@ For instance, through
 
 # Host preparation
 See [the guide dedicated to the Proxmox
-setup](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md).
+setup](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md).
 
 # CFSSL
 
