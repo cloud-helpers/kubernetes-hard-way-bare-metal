@@ -87,7 +87,7 @@ This guide also makes use of the
 article](https://medium.com/@kvaps/run-kubernetes-in-lxc-container-f04aa94b6c9c),
 for the adaptation from KVM/QEMU virtual machines (VM) to LXC containers.
 Basically, a few more options have to be set up on the (Proxmox) host
-to that the (LXC) containers may run Docker inside.
+so that the (LXC) containers may run Docker inside.
 
 Overall, this guide is therefore both an update for the
 "Kubernetes The Hard Way" guides and an adpation for light-weight
