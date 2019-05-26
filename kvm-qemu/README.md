@@ -30,6 +30,7 @@ Kubernetes The Hard Way - Bare Metal with KVM/QEMU Virtual Machines (VM)
 aims at providing a full hands-on guide to set up a
 [Kubernetes (aka K8S)](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
+[KVM/QEMU virtual machines (VM)](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine).
 
 Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
