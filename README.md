@@ -18,6 +18,12 @@ itself derived from the famous
 guide](https://github.com/kelseyhightower/kubernetes-the-hard-way),
 by [Kelsey Hightower](https://github.com/kelseyhightower).
 
+As many other documentations, that one will soon be outdated, and imperfect
+for sure. Contributions are therefore welcome to complemenent that guide.
+For instance, through
+[issues](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/issues) or
+[pull requests](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/pulls).
+
 # [With KVM/QEMU Virtual Machines (VM)](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/kvm-qemu/README.md)
 Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
@@ -52,6 +58,17 @@ and serverless platforms, mainly servicing single processes.
 [This guide](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
 therefore aims at helping filling the gap of documentation in the
 Linux container space for Kubernetes.
+
+# [Proxmox Setup](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/proxmox/README.md)
+That section provides some details on how to prepare a
+[Proxmox distribution](https://pve.proxmox.com) in order
+to setup Kubernetes clusters on it.
+
+All the Kubernetes cluster nodes are insulated thanks to a gateway:
+all the traffic from outside the cluster is channelled through the gateway.
+The set up of such a gateway is also an addition to this set of guides.
+It allows one to experiment with Kubernetes clusters, including operating
+some in production-like settings, while keeping some good level of security.
 
 # References
 * [Kubernetes The Hard Way - Bare Metal](https://github.com/Praqma/LearnKubernetes/blob/master/kamran/Kubernetes-The-Hard-Way-on-BareMetal.md),
