@@ -69,8 +69,8 @@ aims at providing a full hands-on guide to set up a
 [Kubernetes (aka K8S)](https://kubernetes.io/) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
 [LXC containers](https://linuxcontainers.org/#LXC).
-Using [LXD](https://linuxcontainers.org/#LXD) rather than Proxmox should
-not make much difference.
+Using [LXD](https://linuxcontainers.org/#LXD) or [OpenVZ](https://openvz.org)
+rather than Proxmox should not make much difference.
 
 It is an adaptation of the excellent
 ["Kubernetes The Hard Way - Bare Metal"
@@ -100,12 +100,12 @@ containers (rather than full virtual machines (VM)).
 While there are quite a few articles and solutions on Kubernetes and similar
 clusters in Docker containers (_e.g._, [KinD](https://kind.sigs.k8s.io),
 [Footloose](https://github.com/weaveworks/footloose)), the literature remains
-scarce about Kubernetes deplloyed on container technologies
-such as Linux containers (_e.g._, LXC, [OpenVZ](https://openvz.org)).
+scarce about Kubernetes deployed on container technologies
+such as Linux containers (_e.g._, LXC, OpenVZ).
 However, Linux containers allow for far more flexibility than Docker
 containers. Basically, Linux containers aim at executing full-blown (Linux)
 operating system (OS), whereas Docker containers aim at micro-services
-and serverless, mainly servicing single processes.
+and serverless platforms, mainly servicing single processes.
 
 This guide therefore aims at helping filling the gap of documentation in
 the Linux container space.

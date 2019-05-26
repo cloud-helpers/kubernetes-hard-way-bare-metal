@@ -8,7 +8,8 @@ Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
 [KVM/QEMU virtual machines (VM)](https://en.wikipedia.org/wiki/Kernel-based_Virtual_Machine).
 Using any other
-[virtualization framework](https://en.wikipedia.org/wiki/OS-level_virtualisation)than Proxmox should not make much difference.
+[virtualization framework](https://en.wikipedia.org/wiki/OS-level_virtualisation)
+than Proxmox should not make much difference.
 
 While full virtualization (with virtual machines) provides more flexibility
 (_e.g._, choice of kernel and type of operating system, reserved CPU and
@@ -20,25 +21,26 @@ requirements.
 Guide to set up a [Kubernetes](https://kubernetes.io) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
 [LXC containers](https://linuxcontainers.org/#LXC).
-Using [LXD](https://linuxcontainers.org/#LXD) rather than Proxmox should
-not make much difference.
+Using [LXD](https://linuxcontainers.org/#LXD) or [OpenVZ](https://openvz.org)
+rather than Proxmox should not make much difference.
 
 While there are quite a few articles and solutions on Kubernetes and similar
 clusters in Docker containers (_e.g._, [KinD](https://kind.sigs.k8s.io),
 [Footloose](https://github.com/weaveworks/footloose)), the literature remains
-scarce about Kubernetes deplloyed on container technologies
-such as Linux containers (_e.g._, LXC, [OpenVZ](https://openvz.org)).
+scarce about Kubernetes deployed on container technologies
+such as Linux containers (_e.g._, LXC, OpenVZ).
 However, Linux containers allow for far more flexibility than Docker
 containers. Basically, Linux containers aim at executing full-blown (Linux)
 operating system (OS), whereas Docker containers aim at micro-services
-and serverless, mainly servicing single processes.
+and serverless platforms, mainly servicing single processes.
 
-This guide therefore aims at helping filling the gap of documentation in
-the Linux container space.
+[This guide](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
+therefore aims at helping filling the gap of documentation in the
+Linux container space for Kubernetes.
 
-# Overview
-[This document](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
-aims at providing full hands-on guides to set up
+# General
+[This set of documents](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
+aim at providing full hands-on guides to set up
 [Kubernetes (aka K8S)](https://kubernetes.io) clusters on bare metal servers,
 which can actually be physical servers or virtual machines (VM),
 on premises or in private and public clouds.
@@ -70,5 +72,4 @@ by [Kelsey Hightower](https://github.com/kelseyhightower).
 * Kubernetes - Pod Networking, by
   [Marvin The Paranoid - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=75140812)
   ![Kubernetes - Pod Networking](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Pod%20Networking.png "Kubernetes - Pod Networking")
-* [Documentation, generate the table of content (TOC)](https://ecotrust-canada.github.io/markdown-toc/)
 
