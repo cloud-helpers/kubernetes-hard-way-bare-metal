@@ -64,7 +64,7 @@ Kubernetes The Hard Way - Bare Metal with LXC Containers
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
 # Overview
-[This document](https://github.com/cloud-helpers/kubernetes-hard-way-proxmox-lxc/blob/master/README.md)
+[This document](https://github.com/cloud-helpers/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/README.md)
 aims at providing a full hands-on guide to set up a
 [Kubernetes (aka K8S)](https://kubernetes.io/) cluster on
 [Proxmox-based](https://www.proxmox.com/en/proxmox-ve/features)
@@ -97,6 +97,19 @@ Overall, this guide is therefore both an update for the
 "Kubernetes The Hard Way" guides and an adpation for light-weight
 containers (rather than full virtual machines (VM)).
 
+While there are quite a few articles and solutions on Kubernetes and similar
+clusters in Docker containers (_e.g._, [KinD](https://kind.sigs.k8s.io),
+[Footloose](https://github.com/weaveworks/footloose)), the literature remains
+scarce about Kubernetes deplloyed on container technologies
+such as Linux containers (_e.g._, LXC, [OpenVZ](https://openvz.org)).
+However, Linux containers allow for far more flexibility than Docker
+containers. Basically, Linux containers aim at executing full-blown (Linux)
+operating system (OS), whereas Docker containers aim at micro-services
+and serverless, mainly servicing single processes.
+
+This guide therefore aims at helping filling the gap of documentation in
+the Linux container space.
+
 All the nodes are setup with [CentOS distributions](https://www.centos.org),
 and insulated thanks to a gateway: all the traffic from outside
 the cluster is channelled through the gateway. The set up of such
@@ -126,7 +139,7 @@ For instance, through
 * Kubernetes - Architecture, by
   [Khtan66 - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=53571935)
   ![Kubernetes - Architecture](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Architecture.png "Kubernetes - Architecture")
-* Kubernetes - Pod Networkingby, by
+* Kubernetes - Pod Networking by, by
   [Marvin The Paranoid - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=75140812)
   ![Kubernetes - Pod Networking](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Pod%20Networking.png "Kubernetes - Pod Networking")
 * [Documentation, generate the table of content (TOC)](https://ecotrust-canada.github.io/markdown-toc/)
