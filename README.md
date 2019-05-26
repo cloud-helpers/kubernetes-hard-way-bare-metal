@@ -5,7 +5,7 @@ Kubernetes The Hard Way - Bare Metal with VM and Containers
 
 # General
 [This set of documents](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/README.md)
-aim at providing full hands-on guides to set up
+aims at providing full hands-on guides to set up
 [Kubernetes (aka K8S)](https://kubernetes.io) clusters on bare metal servers,
 which can actually be physical servers or virtual machines (VM),
 on premises or in private and public clouds.
@@ -19,18 +19,18 @@ itself derived from the famous
 guide](https://github.com/kelseyhightower/kubernetes-the-hard-way),
 by [Kelsey Hightower](https://github.com/kelseyhightower).
 
-Except for the Proxomox host itself, which is based on a
+Except for the Proxmox host itself, which is based on a
 [Debian distribution](https://www.debian.org/), all the nodes
 are installed with [CentOS distributions](https://www.centos.org).
 Other distributions may of course be used. One distrubtion has to be chosen,
-so let it be CentOS.
+so let it be CentOS for these guides.
 
 For the Kubernetes-related tools and binaries (_e.g._, Docker, Go,
 `kubectl`), two variants are documented:
 * CentOS 7 packaged versions, _e.g._:
   + [Docker packages](https://git.centos.org/rpms/docker/releases)
   + [Go packages](https://git.centos.org/rpms/golang/releases)
-  + [`kubernetes` packages](https://git.centos.org/rpms/kubernetes/releases)
+  + [Kubernetes packages](https://git.centos.org/rpms/kubernetes/releases)
 * Upstream versions:
   + [Docker CE](https://download.docker.com/linux/centos/7/x86_64/stable/Packages/)
   + [Go latest releases](https://golang.org/doc/devel/release.html)
@@ -39,8 +39,8 @@ For the Kubernetes-related tools and binaries (_e.g._, Docker, Go,
   + [`kubectl` v1.14.2 binary](https://storage.googleapis.com/kubernetes-release/release/v1.14.2/bin/linux/amd64/kubectl)
 * Kubernetes CentOS packages are fairly outdated (v1.5.2).
   There are various consequences, for instance:
-  + The DNS-related services have to keep simple, like (old versions
-    of) [Kube-DNS](https://github.com/kubernetes/dns) only
+  + The DNS-related services are still limited, like (old versions of)
+    [Kube-DNS](https://github.com/kubernetes/dns) only
   + Most of the (recent) documentation on Kubernetes services
     does not work as is with those older versions. For instance,
 	the `Service` part of
@@ -50,7 +50,7 @@ For the Kubernetes-related tools and binaries (_e.g._, Docker, Go,
   an esay task, as all the Docker, Go and Kubernetes tools have been
   packaged in a consistent way on the CentOS distribution. Either of
   those cannot be upgraded to newer versions without breaking the
-  CentOS packaging contraint.
+  CentOS packaging contraint
 * Both variants have been documented, because depending on the use case,
   either may be prefered:
   + CentOS packages for a quick setup, fully supported and consistent
