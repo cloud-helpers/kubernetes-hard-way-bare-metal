@@ -58,6 +58,85 @@ For the Kubernetes-related tools and binaries (_e.g._, Docker, Go,
   + Upstream binaries for a more flexible and up-to-date setup,
     requiring more configuration and maintenance work
 
+The master and worker nodes usually feature
+[different components](https://kubernetes.io/docs/concepts/overview/components/):
+* [Master components](https://kubernetes.io/docs/concepts/overview/components/#master-components)
+  provide the cluster’s control plane.
+  Master components make global decisions about the cluster (for example,
+  scheduling), and detecting and responding to cluster events
+  (starting up a new pod when a replication controller’s replicas field
+  is unsatisfied).
+  + [`kube-apiserver`](https://kubernetes.io/docs/concepts/overview/components/#kube-apiserver ),
+  component on the master that exposes the Kubernetes API. It is the front-end
+  for the Kubernetes control plane. It is designed to scale horizontally –
+  that is, it scales by deploying more instances. 
+  + [`etcd`](https://kubernetes.io/docs/concepts/overview/components/#etcd),
+  consistent and highly-available key value store used as Kubernetes’
+  backing store for all cluster data.
+  + [`kube-scheduler`](https://kubernetes.io/docs/concepts/overview/components/#kube-scheduler),
+  + [`kube-controller-manager`](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager),
+  component on the master that runs controllers. Logically, each controller
+  is a separate process, but to reduce complexity, they are all compiled
+  into a single binary and run in a single process. These controllers include:
+    - Node Controller: responsible for noticing and responding when nodes
+	  go down
+    - Replication Controller: responsible for maintaining the correct number
+	  of pods for every replication controller object in the system
+    - Endpoints Controller: Populates the Endpoints object (that is,
+	  joins Services and Pods)
+    - Service Account and Token Controllers: Create default accounts
+	  and API access tokens for new namespaces
+  + [`cloud-controller-manager`](https://kubernetes.io/docs/concepts/overview/components/#cloud-controller-manager),
+  `cloud-controller-manager` runs controllers that interact with
+  the underlying cloud providers. The cloud-controller-manager binary
+  is an alpha feature introduced in Kubernetes release 1.6
+* [Worker node components](https://kubernetes.io/docs/concepts/overview/components/#node-components)
+  run on every node, maintaining running pods and providing the Kubernetes
+  runtime environment.
+  + [`kubelet`](https://kubernetes.io/docs/concepts/overview/components/#kubelet),
+  is an agent that runs on each node in the cluster. It makes sure that
+  containers are running in a pod.
+  The `kubelet` takes a set of `PodSpecs` that are provided through
+  various mechanisms and ensures that the containers described in those
+  `PodSpecs` are running and healthy. The `kubelet` does not manage
+  containers which were not created by Kubernetes.
+  + [`kube-proxy`](https://kubernetes.io/docs/concepts/overview/components/#kube-proxy)
+  enables the Kubernetes service abstraction by maintaining network rules
+  on the host and performing connection forwarding
+  + [Container Runtime](https://kubernetes.io/docs/concepts/overview/components/#container-runtime)
+  is the software that is responsible for running containers.
+  Kubernetes supports several runtimes: [Docker](http://www.docker.com),
+  [containerd](https://containerd.io), [cri-o](https://cri-o.io),
+  [rktlet](https://github.com/kubernetes-incubator/rktlet)
+  and any implementation of the
+  [Kubernetes CRI (Container Runtime Interface)](https://github.com/kubernetes/community/blob/master/contributors/devel/sig-node/container-runtime-interface.md)
+* On top of those components, come
+  [addons](https://kubernetes.io/docs/concepts/overview/components/#addons),
+  which are pods and services that implement cluster features.
+  The pods may be managed by Deployments, ReplicationControllers, and so on.
+  Namespaced addon objects are created in the `kube-system` namespace.
+  + [DNS](https://kubernetes.io/docs/concepts/overview/components/#dns).
+  While the other addons are not strictly required, all Kubernetes clusters
+  should have
+  [cluster DNS](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/),
+  as many examples rely on it. Cluster DNS is a DNS server,
+  in addition to the other DNS server(s) in your environment,
+  which serves DNS records for Kubernetes services.
+  Containers started by Kubernetes automatically include this DNS server
+  in their DNS searches.
+  + [Web UI](https://kubernetes.io/docs/concepts/overview/components/#web-ui-dashboard)
+  [Dashboard](https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/)
+  is a general purpose, web-based UI for Kubernetes clusters.
+  It allows users to manage and troubleshoot applications running
+  in the cluster, as well as the cluster itself.
+  + [Container Resource
+  Monitoring](https://kubernetes.io/docs/tasks/debug-application-cluster/resource-usage-monitoring/)
+  records generic time-series metrics about containers in a central database,
+  and provides a UI for browsing that data.
+  + [Cluster-level
+  logging](https://kubernetes.io/docs/concepts/overview/components/#cluster-level-logging)
+  is a mechanism responsible for saving container logs to a central log store
+  with search/browsing interface.
 
 As many other documentations, that one will soon be outdated, and imperfect
 for sure. Contributions are therefore welcome to complemenent that guide.
@@ -130,4 +209,5 @@ some in production-like settings, while keeping some good level of security.
 * Kubernetes - Pod Networking, by
   [Marvin The Paranoid - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=75140812)
   ![Kubernetes - Pod Networking](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Pod%20Networking.png "Kubernetes - Pod Networking")
-
+* [Kubernetes components](https://kubernetes.io/docs/concepts/overview/components/),
+  for master and worker nodes
