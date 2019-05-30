@@ -83,6 +83,7 @@ For instance, through
 * [Kubernetes reference documentation](https://kubernetes.io/docs/reference/)
 * [Getting started guide on installing a multi-node Kubernetes cluster
   on Fedora with flannel](https://kubernetes.io/docs/getting-started-guides/fedora/flannel_multi_node_cluster/)
+* [vxLAN](https://vincent.bernat.ch/en/blog/2017-vxlan-linux)
 * Kubernetes - Architecture, by
   [Khtan66 - Own work, CC BY-SA 4.0](https://commons.wikimedia.org/w/index.php?curid=53571935)
   ![Kubernetes - Architecture](https://github.com/cloud-helpers/kubernetes-hard-way-bare-metal/blob/master/lxc/img/Kubernetes%20-%20Architecture.png "Kubernetes - Architecture")
@@ -316,7 +317,6 @@ root@proxmox:~$ swapoff -a
 root@proxmox:~$ sed -i -e 's|/dev/mapper/centos-swap|#/dev/mapper/centos-swap|g' /etc/fstab
 root@proxmox:~$ modprobe br_netfilter
 root@proxmox:~$ echo '1' > /proc/sys/net/bridge/bridge-nf-call-iptables
-root@proxmox:~$ yum -y install kubernetes flannel
 root@proxmox:~$ cat >> ~/.bashrc << _EOF
 
 # Kubernetes
@@ -475,7 +475,7 @@ _EOF
 
 * Start the appropriate services on the nodes:
 ```bash
-root@kub-node1:~# kubsvc_list=(kube-proxy kube-apiserver kubelet flanneld docker)
+root@kub-node1:~# kubsvc_list=(kube-proxy kubelet flanneld docker)
 root@kub-node1:~# for kubsvc in ${kubsvc_list[*]}; do systemctl restart $kubsvc && systemctl enable $kubsvc && systemctl status $kubsvc -l; done
 ```
 
@@ -484,7 +484,7 @@ root@kub-node1:~# for kubsvc in ${kubsvc_list[*]}; do systemctl restart $kubsvc 
 root@kub-node1:~# cat >> ~/.bash_aliases << _EOF
 
 # Kubernetes
-kubsvc_list=(kube-proxy kube-apiserver kubelet flanneld docker)
+kubsvc_list=(kube-proxy kubelet flanneld docker)
 alias kubsvcrestart='for kubsvc in \${kubsvc_list[*]}; do systemctl restart \$kubsvc; done'
 alias kubsvcstop='for kubsvc in \${kubsvc_list[*]}; do systemctl stop \$kubsvc; done'
 alias kubsvcstart='for kubsvc in \${kubsvc_list[*]}; do systemctl start \$kubsvc; done'
