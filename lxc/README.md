@@ -250,6 +250,12 @@ root@gwkublxc:~# cat > /opt/cfssl/etc/kubernetes-csr.json << _EOF
   "CN": "*.example.com",
   "hosts": [
     "10.32.0.1",
+    "10.240.0.200",
+    "10.240.0.201",
+    "10.240.0.202",
+    "kub-master.example.com",
+    "kub-node1.example.com",
+    "kub-node2.example.com",
     "etcd1",
     "etcd2",
     "etcd1.example.com",
@@ -288,7 +294,7 @@ root@gwkublxc:~# cat > /opt/cfssl/etc/kubernetes-csr.json << _EOF
     "10.240.0.42",
     "gwkublxc",
     "gwkublxc.example.com",
-    "10.240.0.103",
+    "10.240.0.2",
     "147.135.185.243",
     "localhost",
     "127.0.0.1"
@@ -729,7 +735,7 @@ tcp        0      0 127.0.0.1:2379          0.0.0.0:*               LISTEN      
 tcp        0      0 10.240.0.11:2380        0.0.0.0:*               LISTEN      4746/etcd           
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      266/sshd            
 tcp        0      0 127.0.0.1:40872         127.0.0.1:2379          ESTABLISHED 4746/etcd           
-tcp        0      0 10.240.0.11:22          10.240.0.103:42792      ESTABLISHED 4419/sshd: root@pts 
+tcp        0      0 10.240.0.11:22          10.240.0.2:42792        ESTABLISHED 4419/sshd: root@pts 
 tcp        0      0 10.240.0.11:39722       10.240.0.11:2379        ESTABLISHED 4746/etcd           
 tcp        0      0 10.240.0.11:2379        10.240.0.11:39722       ESTABLISHED 4746/etcd           
 tcp        0      0 127.0.0.1:2379          127.0.0.1:40872         ESTABLISHED 4746/etcd           
@@ -756,7 +762,7 @@ tcp        0      0 10.240.0.12:2380        0.0.0.0:*               LISTEN      
 tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      389/sshd            
 tcp        0      0 127.0.0.1:2379          127.0.0.1:40864         ESTABLISHED 1179/etcd           
 tcp        0      0 127.0.0.1:40864         127.0.0.1:2379          ESTABLISHED 1179/etcd           
-tcp        0      0 10.240.0.12:22          10.240.0.103:58082      ESTABLISHED 635/sshd: root@pts/ 
+tcp        0      0 10.240.0.12:22          10.240.0.2:58082        ESTABLISHED 635/sshd: root@pts/ 
 tcp        0      0 10.240.0.12:2379        10.240.0.12:60890       ESTABLISHED 1179/etcd           
 tcp        0      0 10.240.0.12:60890       10.240.0.12:2379        ESTABLISHED 1179/etcd           
 tcp6       0      0 :::22                   :::*                    LISTEN      389/sshd            

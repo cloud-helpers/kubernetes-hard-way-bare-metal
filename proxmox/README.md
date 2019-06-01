@@ -179,7 +179,7 @@ _EOF
 # Kubernetes cluster gateway
 * Create the LXC container for the Kubernetes cluster gateway:
 ```bash
-root@proxmox:~$ pct create 103 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname gwkublxc.example.com --memory 1024 --swap 2048 --net0 name=eth0,bridge=vmbr0,firewall=1,gw=${HST_GTW_IP},hwaddr=${GTW_MAC},ip=${GTW_IP}/32,type=veth --net1 name=eth1,bridge=vmbr3,ip=10.240.0.103/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 103 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname gwkublxc.example.com --memory 1024 --swap 2048 --net0 name=eth0,bridge=vmbr0,firewall=1,gw=${HST_GTW_IP},hwaddr=${GTW_MAC},ip=${GTW_IP}/32,type=veth --net1 name=eth1,bridge=vmbr3,ip=10.240.0.2/24,type=veth --onboot 1 --ostype centos
 ```
 
 * Start and enter the gateway:
