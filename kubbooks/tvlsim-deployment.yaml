@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tvlsim-deployment
+  labels:
+    app: tvlsim
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tvlsim
+  template:
+    metadata:
+      labels:
+        app: tvlsim
+    spec:
+      containers:
+      - name: tvlsim
+        image: tvlsim/metasim:centos
+        command: ["/home/build/dev/sim/workspace/install/airinv/bin/AirInvServer"]
+        ports:
+        - containerPort: 5555
+

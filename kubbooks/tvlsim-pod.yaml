@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: tvlsim
+  labels:
+    purpose: bootstrap-sim
+spec:
+  containers:
+  - name: tvlsim-container
+    image: tvlsim/metasim:centos
+    command: ["/home/build/dev/sim/workspace/install/airinv/bin/AirInvServer"]
+  restartPolicy: OnFailure
+
+

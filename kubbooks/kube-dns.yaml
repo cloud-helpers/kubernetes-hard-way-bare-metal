@@ -1,0 +1,77 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Endpoints
+  metadata:
+    creationTimestamp: "2019-01-13T10:35:26Z"
+    labels:
+      k8s-app: kube-dns
+      kubernetes.io/cluster-service: "true"
+      kubernetes.io/name: KubeDNS
+    name: kube-dns
+    namespace: kube-system
+    resourceVersion: "979432"
+    selfLink: /api/v1/namespaces/kube-system/endpoints/kube-dns
+    uid: f0b8ed71-171e-11e9-8b41-025000000001
+  subsets:
+  - addresses:
+    - ip: 10.1.1.84
+      nodeName: docker-desktop
+      targetRef:
+        kind: Pod
+        name: coredns-86c58d9df4-2fd2z
+        namespace: kube-system
+        resourceVersion: "979430"
+        uid: f0c16b31-171e-11e9-8b41-025000000001
+    - ip: 10.1.1.85
+      nodeName: docker-desktop
+      targetRef:
+        kind: Pod
+        name: coredns-86c58d9df4-bf2fj
+        namespace: kube-system
+        resourceVersion: "979426"
+        uid: f0c0761d-171e-11e9-8b41-025000000001
+    ports:
+    - name: dns
+      port: 53
+      protocol: UDP
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      prometheus.io/port: "9153"
+      prometheus.io/scrape: "true"
+    creationTimestamp: "2019-01-13T10:35:20Z"
+    labels:
+      k8s-app: kube-dns
+      kubernetes.io/cluster-service: "true"
+      kubernetes.io/name: KubeDNS
+    name: kube-dns
+    namespace: kube-system
+    resourceVersion: "215"
+    selfLink: /api/v1/namespaces/kube-system/services/kube-dns
+    uid: ed2b1903-171e-11e9-8b41-025000000001
+  spec:
+    clusterIP: 10.96.0.10
+    ports:
+    - name: dns
+      port: 53
+      protocol: UDP
+      targetPort: 53
+    - name: dns-tcp
+      port: 53
+      protocol: TCP
+      targetPort: 53
+    selector:
+      k8s-app: kube-dns
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
