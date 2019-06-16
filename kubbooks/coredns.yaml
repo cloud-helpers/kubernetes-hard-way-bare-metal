@@ -87,5 +87,5 @@ spec:
           - key: Corefile
             path: Corefile
           name: coredns
-       name: config-volume
+        name: config-volume
 
