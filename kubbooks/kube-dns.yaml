@@ -55,7 +55,7 @@ items:
     selfLink: /api/v1/namespaces/kube-system/services/kube-dns
     uid: ed2b1903-171e-11e9-8b41-025000000001
   spec:
-    clusterIP: 10.96.0.10
+    clusterIP: 10.32.0.10
     ports:
     - name: dns
       port: 53
