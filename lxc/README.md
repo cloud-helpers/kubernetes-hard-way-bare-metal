@@ -16,13 +16,12 @@ Kubernetes The Hard Way - Bare Metal with LXC Containers
   * [Worker nodes](#worker-nodes)
   * [Load balancers (lb)](#load-balancers--lb-)
   * [On the clients (eg, laptops)](#on-the-clients--eg--laptops-)
-  * [Propagation of certificates on the newly created LXC containers](#propagation-of-certificates-on-the-newly-created-lxc-containers)
-  * [Supplementary configuration of the LXC containers](#supplementary-configuration-of-the-lxc-containers)
-    + [General](#general)
-    + [SSH](#ssh)
-    + [Basic checks for the configuration of the LXC containers](#basic-checks-for-the-configuration-of-the-lxc-containers)
+  * [List of the Kubernetes nodes](#list-of-the-kubernetes-nodes)
+  * [Install the Kubernetes cluster certificates on the Kubernetes nodes](#install-the-kubernetes-cluster-certificates-on-the-kubernetes-nodes)
+  * [Complementary packages for the Kubernetes nodes](#complementary-packages-for-the-kubernetes-nodes)
+  * [Basic checks](#basic-checks)
 - [Set up of the configuration management (`etcd`) servers](#set-up-of-the-configuration-management---etcd---servers)
-  * [Check the setup](#check-the-setup)
+  * [Check the setup on each `etcd` node](#check-the-setup-on-each--etcd--node)
 - [Kubernetes API, controller and scheduler servers](#kubernetes-api--controller-and-scheduler-servers)
   * [Installation of complementary packages](#installation-of-complementary-packages)
   * [Go](#go)
@@ -37,8 +36,6 @@ Kubernetes The Hard Way - Bare Metal with LXC Containers
   * [Helper tools (`kubectx` / `kubens`)](#helper-tools---kubectx-----kubens--)
   * [Check the components](#check-the-components)
 - [Kubernetes worker nodes](#kubernetes-worker-nodes)
-  * [Installation of complementary packages](#installation-of-complementary-packages-1)
-  * [Kubernetes certificates](#kubernetes-certificates-1)
   * [Kubernetes binaries](#kubernetes-binaries-1)
   * [Docker](#docker)
   * [CNI network plugin](#cni-network-plugin)
@@ -47,11 +44,14 @@ Kubernetes The Hard Way - Bare Metal with LXC Containers
     + [Kubernetes configuration file (`KUBECONFIG`)](#kubernetes-configuration-file---kubeconfig--)
     + [Kubelet service](#kubelet-service)
   * [`kube-proxy` configuration](#-kube-proxy--configuration)
-  * [Check the Kubernetes services on the worker nodes](#check-the-kubernetes-services-on-the-worker-nodes)
+  * [Checks](#checks)
   * [CoreDNS](#coredns)
+    + [Query the cluster](#query-the-cluster)
     + [Smoke test with busybox](#smoke-test-with-busybox)
+  * [Remove CoreDNS](#remove-coredns)
     + [CoreDNS from the sources (optional)](#coredns-from-the-sources--optional-)
 - [Kube DNS](#kube-dns)
+  * [Remove KubeDNS](#remove-kubedns)
 - [Kubernetes client on the gateway](#kubernetes-client-on-the-gateway)
 - [Smoke tests with replicas on Alpine network multi-tool](#smoke-tests-with-replicas-on-alpine-network-multi-tool)
 - [Smoke tests with replicas of Nginx](#smoke-tests-with-replicas-of-nginx)
@@ -383,7 +383,7 @@ root@proxmox:~$
 ## Configuration management (`etcd`) servers
 * `etcd1`:
 ```bash
-root@proxmox:~$ pct create 211 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname etcd1.example.com --memory 1024 --swap 2048 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.11/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 211 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 1 --hostname etcd1.example.com --memory 1024 --swap 2048 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.11/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 211 rootfs 10G
 root@proxmox:~$ pct start 211 && pct enter 211
 root@etcd1# yum -y update && yum -y install epel-release
@@ -401,7 +401,7 @@ root@etcd1# exit
 
 * `etcd2`:
 ```bash
-root@proxmox:~$ pct create 212 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname etcd2.example.com --memory 1024 --swap 2048 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.12/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 212 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 1 --hostname etcd2.example.com --memory 1024 --swap 2048 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.12/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 212 rootfs 10G
 root@proxmox:~$ pct start 212 && pct enter 212
 root@etcd1# yum -y update && yum -y install epel-release
@@ -420,13 +420,13 @@ root@etcd1# exit
 ## Controller plane servers
 * `controller`:
 ```bash
-root@proxmox:~$ pct create 220 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 2 --hostname controller.example.com --memory 2048 --swap 4096 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.20/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 220 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 2 --hostname controller.example.com --memory 2048 --swap 4096 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.20/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 220 rootfs 10G
 ```
 
 * `controller1`:
 ```bash
-root@proxmox:~$ pct create 221 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 2 --hostname controller1.example.com --memory 2048 --swap 4096 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.21/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 221 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 2 --hostname controller1.example.com --memory 2048 --swap 4096 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.21/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 221 rootfs 10G
 root@proxmox:~$ pct start 221 && pct enter 221
 root@controller1# yum -y update && yum -y install epel-release
@@ -444,7 +444,7 @@ root@controller1# exit
 
 * `controller2`:
 ```bash
-root@proxmox:~$ pct create 222 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 2 --hostname controller2.example.com --memory 2048 --swap 4096 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.22/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 222 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 2 --hostname controller2.example.com --memory 2048 --swap 4096 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.22/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 222 rootfs 10G
 root@proxmox:~$ pct start 222 && pct enter 222
 root@controller2# yum -y update && yum -y install epel-release
@@ -461,10 +461,38 @@ root@controller2# exit
 ```
 
 ## Worker nodes
+* From Kubernetes v1.15 (June 2019), it seems that `kubelet` needs to access
+  `/dev/kmsg` to work properly. As that device has been dropped from Proxmox LXC,
+  it needs to be created for every worker container. First, a `mount-hook.sh`
+  is added, and that helper script is invoked from the LXC ocnfiguration files.
+```bash
+root@proxmox$ ls -laFh /dev/kmsg
+crw-r--r-- 1 root root 1, 11 Jun 23 01:10 /dev/kmsg
+root@proxmox$ cat > /var/lib/lxc/231/mount-hook.sh << _EOF
+#!/bin/sh
+
+mknod -m 777 ${LXC_ROOTFS_MOUNT}/dev/kmsg c 1 11
+_EOF
+```
+
+* Derive the short version of the hostname:
+```bash
+root@proxmox$ myhost=$(hostname|cut -d'.' -f1,1)
+```
+
 * `worker1`:
 ```bash
-root@proxmox:~$ pct create 231 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 8 --hostname worker1.example.com --memory 16384 --swap 16384 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.31/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 231 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 8 --hostname worker1.example.com --memory 16384 --swap 16384 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.31/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 231 rootfs 20G
+root@proxmox$ cat >> /etc/pve/nodes/${myhost}/lxc/231.conf << _EOF
+lxc.apparmor.profile: unconfined
+lxc.cap.drop: 
+lxc.cgroup.devices.allow: a
+lxc.mount.auto: proc:rw sys:rw
+lxc.cgroup.devices.allow: c 1:11 rwm
+lxc.hook.autodev: /var/lib/lxc/231/mount-hook.sh
+lxc.mount.entry: /dev/kmsg dev/kmsg none bind,optional 0 0
+_EOF
 root@proxmox:~$ pct start 231 && pct enter 231
 root@worker1# yum -y update && yum -y install epel-release
 root@worker1# yum -y install net-tools bind-utils whois file less htop git \
@@ -477,12 +505,22 @@ ssh-rsa AAAxxxZZZ k8s@example.com
 _EOF
 chmod 600 ~/.ssh/authorized_keys
 root@worker1# exit
+root@proxmox$ # lxc-device add -n 231 /dev/kmsg
 ```
 
 * `worker2`:
 ```bash
-root@proxmox:~$ pct create 232 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 8 --hostname worker2.example.com --memory 16384 --swap 16384 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.32/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 232 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 8 --hostname worker2.example.com --memory 16384 --swap 16384 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.32/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ pct resize 232 rootfs 20G
+root@proxmox$ cat >> /etc/pve/nodes/${myhost}/lxc/232.conf << _EOF
+lxc.apparmor.profile: unconfined
+lxc.cap.drop: 
+lxc.cgroup.devices.allow: a
+lxc.mount.auto: proc:rw sys:rw
+lxc.cgroup.devices.allow: c 1:11 rwm
+lxc.hook.autodev: /var/lib/lxc/231/mount-hook.sh
+lxc.mount.entry: /dev/kmsg dev/kmsg none bind,optional 0 0
+_EOF
 root@proxmox:~$ pct start 232 && pct enter 232
 root@worker2# yum -y update && yum -y install epel-release
 root@worker2# yum -y install net-tools bind-utils whois file less htop git \
@@ -495,12 +533,13 @@ ssh-rsa AAAxxxZZZ k8s@example.com
 _EOF
 chmod 600 ~/.ssh/authorized_keys
 root@worker2# exit
+root@proxmox$ # lxc-device add -n 232 /dev/kmsg
 ```
 
 ## Load balancers (lb)
 * `lb`:
 ```bash
-root@proxmox:~$ pct create 240 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname lb.example.com --memory 512 --swap 1024 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.40/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 240 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 1 --hostname lb.example.com --memory 512 --swap 1024 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.40/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ # pct resize 240 rootfs 4G
 root@proxmox:~$ pct start 240 && pct enter 240
 root@lb# yum -y update && yum -y install epel-release
@@ -518,7 +557,7 @@ root@lb# exit
 
 * `lb1`:
 ```bash
-root@proxmox:~$ pct create 241 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname lb1.example.com --memory 512 --swap 1024 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.41/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 241 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 1 --hostname lb1.example.com --memory 512 --swap 1024 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.41/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ # pct resize 241 rootfs 4G
 root@proxmox:~$ pct start 241 && pct enter 241
 root@lb1# yum -y update && yum -y install epel-release
@@ -536,7 +575,7 @@ root@lb1# exit
 
 * `lb2`:
 ```bash
-root@proxmox:~$ pct create 242 local:vztmpl/centos-7-default_20190510_amd64.tar.xz --arch amd64 --cores 1 --hostname lb2.example.com --memory 512 --swap 1024 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.42/24,type=veth --onboot 1 --ostype centos
+root@proxmox:~$ pct create 242 local:vztmpl/centos-7-default_20171212_amd64.tar.xz --arch amd64 --cores 1 --hostname lb2.example.com --memory 512 --swap 1024 --net0 name=eth0,bridge=vmbr3,gw=10.240.0.2,ip=10.240.0.42/24,type=veth --onboot 1 --ostype centos
 root@proxmox:~$ # pct resize 242 rootfs 4G
 root@proxmox:~$ pct start 242 && pct enter 242
 root@lb2# yum -y update && yum -y install epel-release
@@ -1377,12 +1416,36 @@ _EOF
 
 * Distribute the Kubernetes configuration file to the nodes:
 ```bash
-root@gwkublxc:~# for node in "${nodeip_list[@]}"; do \
+root@gwkublxc:~# for node in "${node_list[@]}"; do \
  rsync -av /var/lib/kubelet root@${node}:/var/lib/; done
 ```
 
 ### Kubelet service
-* Create the service file:
+* Create the [`kubelet` configuration
+  file](https://kubernetes.io/docs/tasks/administer-cluster/kubelet-config-file/),
+  [specifying a `KubeletConfiguration`
+  struct](https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/kubelet/config/v1beta1/types.go):
+```bash
+root@gwkublxc:~# cat > /var/lib/kubelet/kubelet-config.yaml << _EOF
+apiVersion: kubelet.config.k8s.io/v1beta1
+kind: KubeletConfiguration
+clusterDNS:
+- 10.32.0.10
+clusterDomain: cluster.local
+tlsCertFile: /var/lib/kubernetes/kubernetes.pem
+tlsPrivateKeyFile: /var/lib/kubernetes/kubernetes-key.pem
+serializeImagePulls: false
+failSwapOn: false
+_EOF
+```
+
+* Upload the configuration file to all the worker nodes:
+```bash
+root@gwkublxc:~# for node in "${node_list[@]}"; do \
+  rsync -av /var/lib/kubelet/ root@${node}:/var/lib/kubelet/; done
+```
+
+* Create the Kubelet service file:
 ```bash
 root@gwkublxc:~# cat > /etc/systemd/system/kubelet.service << _EOF
 [Unit]
@@ -1393,18 +1456,10 @@ Requires=docker.service
 
 [Service]
 ExecStart=/usr/local/bin/kubelet \\
- --allow-privileged=true \\
- --cloud-provider= \\
- --cluster-dns=10.32.0.10 \\
- --cluster-domain=cluster.local \\
+ --config=/var/lib/kubelet/kubelet-config.yaml \\
  --container-runtime=docker \\
- --docker=unix:///var/run/docker.sock \\
  --network-plugin=kubenet \\
  --kubeconfig=/var/lib/kubelet/kubeconfig \\
- --serialize-image-pulls=false \\
- --fail-swap-on=false \\
- --tls-cert-file=/var/lib/kubernetes/kubernetes.pem \\
- --tls-private-key-file=/var/lib/kubernetes/kubernetes-key.pem \\
  --v=2
 
 Restart=on-failure
@@ -1415,20 +1470,41 @@ WantedBy=multi-user.target
 _EOF
 ```
 
+* Upload the service file to all the worker nodes:
+```bash
+root@gwkublxc:~# for node in "${node_list[@]}"; do \
+  rsync -av /etc/systemd/system/kubelet.service root@${node}:/etc/systemd/system/; done
+```
+
 * Distribute the service file to the nodes:
 ```bash
-root@gwkublxc:~# for node in "${nodeip_list[@]}"; do \
- rsync -av /etc/systemd/system/kubelet.service \
-  root@${node}:/etc/systemd/system/; done
-root@gwkublxc:~# for node in "${nodeip_list[@]}"; do \
- ssh root@${node} "systemctl daemon-reload && \
+root@gwkublxc:~# for node in "${node_list[@]}"; do ssh root@${node} "\
+  systemctl daemon-reload && \
   systemctl start kubelet.service && \
   systemctl enable kubelet.service && \
   systemctl status kubelet.service -l"; done
 ```
 
 ## `kube-proxy` configuration
-* Create the service file:
+* Create the `kube-proxy` configuration file:
+```bash
+root@gwkublxc:~# cat > /var/lib/kubelet/kube-proxy-config.yaml << _EOF
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+clientConnection:
+  kubeconfig: "/var/lib/kubelet/kubeconfig"
+mode: "iptables"
+clusterCIDR: "10.200.0.0/16"
+_EOF
+```
+
+* Upload the configuration file to all the worker nodes:
+```bash
+root@gwkublxc:~# for node in "${node_list[@]}"; do \
+  rsync -av /var/lib/kubelet/ root@${node}:/var/lib/kubelet/; done
+```
+
+* Create the `kube-proxy` service file:
 ```bash
 root@gwkublxc:~# cat > /etc/systemd/system/kube-proxy.service << _EOF
 [Unit]
@@ -1437,10 +1513,7 @@ Documentation=https://github.com/GoogleCloudPlatform/kubernetes
 
 [Service]
 ExecStart=/usr/local/bin/kube-proxy \\
-  --master=https://10.240.0.21:6443 \\
-  --kubeconfig=/var/lib/kubelet/kubeconfig \\
-  --proxy-mode=iptables \\
-  --v=2
+  --config=/var/lib/kubelet/kube-proxy-config.yaml
 
 Restart=on-failure
 RestartSec=5
@@ -1450,14 +1523,16 @@ WantedBy=multi-user.target
 _EOF
 ```
 
-* Distribute the service file to the nodes:
+* Upload the `kube-proxy` service file on all the worker nodes:
 ```bash
-root@gwkublxc:~# for node in "${nodeip_list[@]}"; do \
- rsync -av /etc/systemd/system/kube-proxy.service \
-  root@${node}:/etc/systemd/system/; done
-root@gwkublxc:~# for node in "${nodeip_list[@]}"; do \
- ssh root@${node} "systemctl daemon-reload && \
-  systemctl start kube-proxy.service && \
+root@gwkublxc:~# for node in "${node_list[@]}"; do \
+  rsync -av /etc/systemd/system/kube-proxy.service root@${node}:/etc/systemd/system/; done
+```
+
+* Start the `kube-proxy` service on the worker nodes:
+```bash
+root@gwkublxc:~# for node in "${node_list[@]}"; do ssh root@${node} "\
+  systemctl daemon-reload && systemctl start kube-proxy.service && \
   systemctl enable kube-proxy.service && \
   systemctl status kube-proxy.service -l"; done
 ```

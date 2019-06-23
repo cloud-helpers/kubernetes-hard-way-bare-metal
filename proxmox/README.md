@@ -160,6 +160,20 @@ NamePolicy=kernel database onboard slot path mac
 ```
 
 ## Get the latest CentOS templates
+* List [available templates supported by Proxmox](http://download.proxmox.com/images/system/):
+```bash
+root@proxmox:~$ pveam update
+root@proxmox:~$ pveam available
+```
+
+* Download locally a remotely available template:
+```bash 
+root@proxmox:~$ pveam download local centos-7-default_20171212_amd64.tar.xz
+root@proxmox:~$ pveam list local
+root@proxmox:~$ # Which should give the same result as:
+root@proxmox:~$ ls -la /var/lib/vz/template/cache
+```
+
 * Download the latest template from the
   [Linux containers site](https://us.images.linuxcontainers.org/images/centos/7/amd64/default/)
   (change the date and time-stamp according to the time you download that
@@ -168,12 +182,39 @@ NamePolicy=kernel database onboard slot path mac
 root@proxmox:~$ wget https://us.images.linuxcontainers.org/images/centos/7/amd64/default/20190510_07:08/rootfs.tar.xz -O /vz/template/cache/centos-7-default_20190510_amd64.tar.xz
 ```
 
-## Overlay module
+## Kernel modules
+
+### Overlay module
 ```bash
 root@proxmox:~$ modprobe overlay && \
- cat > /etc/modules-load.d/docker-overlay.conf << _EOF
+  cat > /etc/modules-load.d/docker-overlay.conf << _EOF
 overlay
 _EOF
+```
+
+### `nf_conntrack`
+* The `hashsize` parameter should be set to at least 32768.
+  We can set it tp 65536. But the Proxmox firewall resets the value every
+  so often to 16384. The following shows how that parameter may be set
+  when the module is loaded:
+```bash
+root@proxmox:~$ modprobe nf_conntrack hashsize=65536 && \
+  cat > /etc/modules-load.d/nf_conntrack.conf << _EOF
+options nf_conntrack hashsize=65536
+_EOF
+root@proxmox:~$ # echo "65536" > /sys/module/nf_conntrack/parameters/hashsize
+root@proxmox:~$ cat /sys/module/nf_conntrack/parameters/hashsize
+65536
+```
+
+* However, as the Proxmox (PVE) firewall resets that value periodically,
+  a work around (to make that change permanent) is to alter
+  the PVE firewall script:
+```bash
+root@proxmox:~$ sed -i -e 's|my $hashsize = int($max/4);|my $hashsize = $max;|g' /usr/share/perl5/PVE/Firewall.pm
+root@proxmox:~$ systemctl restart pve-firewall.service
+root@proxmox:~$ cat /sys/module/nf_conntrack/parameters/hashsize
+65536
 ```
 
 # Kubernetes cluster gateway
